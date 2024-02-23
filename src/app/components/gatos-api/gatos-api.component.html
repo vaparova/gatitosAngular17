@@ -1,0 +1,29 @@
+<br><br>
+<h4>Obteniendo galeria de gatos desde la Api "The Cat API"</h4>
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group me-2" role="group" aria-label="First group">
+      <button type="button" (click)="mostrarGatos(0,3)" class="btn btn-primary">1</button>
+      <button type="button" (click)="mostrarGatos(4,7)" class="btn btn-primary">2</button>
+      <button type="button" (click)="mostrarGatos(8,9)" class="btn btn-primary">3</button>
+    </div>
+  </div>
+
+<div class="row filaGato">
+    <div class="col-sm-3" *ngFor="let gato of arrGatos">
+        <div class="card cardGato" *ngIf="gato.visible">
+            <img class="imgGato" [src]="gato.url">
+            <div class="card-body">
+            <h5 class="card-title"> ID {{gato.id}}</h5>
+            <p class="card-text"> Propiedades</p>
+            <p class="card-text"> width: {{gato.width}}</p>
+            <p class="card-text"> height: {{gato.height}}</p>
+            <p class="card-text"> url: {{gato.url}}</p>
+            <p class="card-text"> visible: {{gato.visible}}</p>
+
+            <!-- <app-componente-uno [url]="i"></app-componente-uno> -->
+            <br>
+            <a href="#" (click)="guardarGato(gato.id)" class="btn btn-primary">Guardar Gato</a>
+        </div>
+    </div>
+    </div>
+</div>

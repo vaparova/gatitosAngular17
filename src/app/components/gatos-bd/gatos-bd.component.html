@@ -1,0 +1,23 @@
+<br><br>    
+
+<h4>Obteniendo imagenes de gatos guardadas en Firebase</h4>
+
+<div class="row filaGato">
+    <div class="col-sm-3" *ngFor="let gato of gatos">
+        <div class="card cardGato">
+            <img class="imgGato img-thumbnail rounded mx-auto d-block" [src]="gato.url">
+            <div class="card-body">
+            <h5 class="card-title"> ID {{gato.id}}</h5>
+            <p class="card-text"> Propiedades</p>
+            <p class="card-text"> width: {{gato.width}}</p>
+            <p class="card-text"> height: {{gato.height}}</p>
+            <p class="card-text"> url: {{gato.url}}</p>
+            <p class="card-text"> visible: {{gato.visible}}</p>
+            <br>
+            <a href="#" (click)="borrarGato(gato.id)" class="btn btn-danger">Borrar Gato</a> 
+            </div>
+        </div>
+       
+    </div>
+  </div>
+
