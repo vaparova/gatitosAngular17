@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Database, child, get, getDatabase, onValue, ref } from '@angular/fire/database';
+import { Database, child, get, getDatabase, onValue, ref, set } from '@angular/fire/database';
 import { Subject } from 'rxjs';
 import { Gato } from '../models/gato';
 
@@ -17,6 +17,10 @@ export class FirebaseService {
 
   constructor() { 
     this.getDataRt();
+  }
+
+  observerData(){
+    return this.data$.asObservable();
   }
 
   getData(){
@@ -41,8 +45,25 @@ export class FirebaseService {
     });
   }
 
-  observerData(){
-    return this.data$.asObservable();
+  setGatoBD(gatos: Gato[]){
+
+    const db = getDatabase();
+    return set(ref(db, 'gatito/'), gatos)
+      .then(() => {
+        // Data saved successfully!
+        console.log('ok!');
+        this.getDataRt();
+      })
+      .catch((error) => {
+        console.error('error!');
+        // The write failed...
+    });
+
+  }
+
+  pushGato(gato: Gato){
+    this.data.push(gato);
+    this.setGatoBD(this.data);
   }
 
   

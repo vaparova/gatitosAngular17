@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { HttpClientService } from '../../providers/http-client.service';
 import { Gato } from '../../models/gato';
+import { FirebaseService } from '../../providers/firebase.service';
 
 @Component({
   selector: 'app-gatos-api',
@@ -13,6 +14,7 @@ import { Gato } from '../../models/gato';
 export class GatosApiComponent {
 
   private apiService = inject(HttpClientService);
+  private fbService = inject(FirebaseService);
   arrGatos: Gato[] = [];
 
   constructor(){
@@ -43,7 +45,13 @@ export class GatosApiComponent {
     });
   }
 
-  guardarGato(i:string){
-    console.log("Esto guarda un gato");
-  }
+  guardarGato(id: string){
+    this.arrGatos.forEach(gato =>{
+      if(gato.id == id){
+        this.fbService.pushGato(gato);
+      }
+    });
+   // this.setGatoDB();   
+  
+    }
 }

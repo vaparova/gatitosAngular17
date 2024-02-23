@@ -30,7 +30,25 @@ export class GatosBDComponent {
     
   }
 
-  borrarGato(i: string){
-    console.log("Esto debe borrar un gato de la BD!");
+  borrarGato(id: string){
+    this.gatos.forEach((gato) =>{
+      console.log(gato.id, id);
+      if(gato.id == id){
+        console.log(this.gatos.indexOf(gato));
+        this.gatos.splice(this.gatos.indexOf(gato),1);
+      }
+    });
+    console.log(this.gatos);
+    this.setGatoDB();
   }
+
+  setGatoDB(){
+    this.fbService.setGatoBD(this.gatos).then( ()=> {
+      console.log('carga exitosa!');
+    }).catch( ()=> {
+      console.log('error en carga bd');
+    });
+    console.log(this.gatos);    
+  }
+
 }
